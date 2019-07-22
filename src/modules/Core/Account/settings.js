@@ -141,9 +141,6 @@ export const SYNCED_ACCOUNT_DEFAULTS = {
   NMR: {
     denomination: '1000000000000000000'
   },
-  BNB: {
-    denomination: '1000000000000000000'
-  },
   MKR: {
     denomination: '1000000000000000000'
   },
