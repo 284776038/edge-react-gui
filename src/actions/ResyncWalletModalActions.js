@@ -7,7 +7,6 @@ import { launchModal } from '../components/common/ModalProvider.js'
 import { RESYNC } from '../constants/indexConstants.js'
 import s from '../locales/strings.js'
 import { getWallet, getWalletName } from '../modules/Core/selectors.js'
-import { resyncWallet } from '../modules/Core/Wallets/api.js'
 import Text from '../modules/UI/components/FormattedText/index'
 import OptionIcon from '../modules/UI/components/OptionIcon/OptionIcon.ui'
 import type { Dispatch, GetState } from '../types/reduxTypes.js'
@@ -35,7 +34,7 @@ export const showResyncWalletModal = (walletId: string) => async (dispatch: Disp
 
   if (resolveValue) {
     try {
-      resyncWallet(wallet)
+      wallet.resyncBlockchain()
     } catch (e) {
       throw new Error(e)
     }

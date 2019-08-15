@@ -10,7 +10,6 @@ import * as Constants from '../constants/indexConstants'
 import { intl } from '../locales/intl'
 import s from '../locales/strings.js'
 import * as CORE_SELECTORS from '../modules/Core/selectors'
-import * as WALLET_API from '../modules/Core/Wallets/api.js'
 import * as SETTINGS_SELECTORS from '../modules/Settings/selectors.js'
 import * as UI_SELECTORS from '../modules/UI/selectors'
 import type { Dispatch, GetState, State } from '../types/reduxTypes.js'
@@ -107,7 +106,7 @@ export const shiftCryptoCurrency = () => async (dispatch: Dispatch, getState: Ge
     try {
       global.firebase && global.firebase.analytics().logEvent(`Exchange_Shift_Start`)
       const broadcastedTransaction: EdgeTransaction = await quote.approve()
-      await WALLET_API.saveTransaction(srcWallet, broadcastedTransaction)
+      await srcWallet.saveTx(broadcastedTransaction)
 
       const category = sprintf(
         'exchange:%s %s %s',
@@ -148,7 +147,7 @@ export const shiftCryptoCurrency = () => async (dispatch: Dispatch, getState: Ge
         notes
       }
       Actions.popTo(Constants.EXCHANGE_SCENE)
-      await WALLET_API.setTransactionDetailsRequest(srcWallet, broadcastedTransaction.txid, broadcastedTransaction.currencyCode, edgeMetaData)
+      await srcWallet.saveTxMetadata(broadcastedTransaction.txid, broadcastedTransaction.currencyCode, edgeMetaData)
 
       dispatch({ type: 'SHIFT_COMPLETE' })
       setTimeout(() => {
