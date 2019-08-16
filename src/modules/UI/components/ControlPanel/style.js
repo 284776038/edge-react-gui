@@ -33,6 +33,11 @@ export default {
     width: scale(22),
     height: scale(22)
   },
+  iconFont: {
+    width: scale(22),
+    height: scale(22),
+    textAlign: 'center'
+  },
 
   /// ///////////////////////////////////////////////////
 
@@ -62,9 +67,5 @@ export default {
   },
   underlay: {
     color: `${THEME.COLORS.PRIMARY}${THEME.ALPHA.LOW}`
-  },
-  debug: {
-    borderColor: 'red',
-    borderWidth: 1
   }
 }
